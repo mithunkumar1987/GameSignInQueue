@@ -1,16 +1,19 @@
 package com.mithun.squash.project.squash.left;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import com.melnykov.fab.FloatingActionButton;
+import com.mithun.squash.project.squash.AddNewPlayer;
 import com.mithun.squash.project.squash.R;
 
 
@@ -87,13 +90,45 @@ public class PlayersListFragment extends Fragment {
         mAdapter = new PlayerListAdapter(getActivity().getApplicationContext());
         mRecyclerView.setAdapter(mAdapter);
 
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        //  fab.attachToRecyclerView(mRecyclerView);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                addNewPlayer();
+            }
+        });
+
         animator = new DefaultItemAnimator();
         animator.setAddDuration(1000);
         //animator.setRemoveDuration(1000);
         mRecyclerView.setItemAnimator(animator);
 
+
+
         return view;
 
+    }
+
+    int ADD_PLAYER_REQUEST_CODE = 1;
+
+    private void addNewPlayer() {
+        Intent intent = new Intent(getActivity(), AddNewPlayer.class);
+        startActivityForResult(intent, ADD_PLAYER_REQUEST_CODE);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //super.onActivityResult(requestCode, resultCode, data);
+        String name = null;
+        String phoneNumber = null;
+        addNewPlayer(name, phoneNumber);
+        mRecyclerView.smoothScrollToPosition(mAdapter.getItemCount());
+    }
+
+    private void addNewPlayer(String name, String phoneNumber) {
+        mAdapter.addNewPlayer(name, phoneNumber);
     }
 
     // TODO: Rename method, update argument and hook method into UI event

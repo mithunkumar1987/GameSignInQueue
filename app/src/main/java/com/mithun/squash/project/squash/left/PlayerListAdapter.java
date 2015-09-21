@@ -81,6 +81,12 @@ public class PlayerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
 
+    void addNewPlayer(String name, String phoneNumber) {
+        PlayerInfoModel item = new PlayerInfoModel("New Name");
+        playerInfoList.add(item);
+        notifyItemInserted(playerInfoList.size());
+    }
+
     void addData() {
 
         for (int i = 1; i < 10; i++) {

@@ -64,6 +64,11 @@ public class PlayersQueueAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return playerInfoList.size();
     }
 
+    public void onItemDismiss(int adapterPosition) {
+        playerInfoList.remove(adapterPosition);
+        notifyItemRemoved(adapterPosition);
+    }
+
 
     public class PlayerInfoViewHolder extends RecyclerView.ViewHolder {
         ImageView photoThumbnail;

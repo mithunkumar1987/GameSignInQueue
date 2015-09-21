@@ -7,6 +7,7 @@ import android.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -90,6 +91,11 @@ public class PlayersQueueFragment extends Fragment {
         animator.setAddDuration(1000);
         //animator.setRemoveDuration(1000);
         mRecyclerView.setItemAnimator(animator);
+
+        //Swipe to dismiss
+        ItemTouchHelper.Callback callback = new ViewTouchHelperCallback(mAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
 
         return view;
     }
