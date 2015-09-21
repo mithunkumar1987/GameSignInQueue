@@ -89,7 +89,7 @@ public class PlayerListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     void addData() {
 
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i <= 10; i++) {
             PlayerInfoModel item = new PlayerInfoModel("Name " + i);
             playerInfoList.add(item);
         }
